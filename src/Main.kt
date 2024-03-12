@@ -2,65 +2,66 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import kotlin.math.sqrt
 
-fun task1(bufferedReader: BufferedReader) {
+fun task1() {
     println("Завдання №1")
 
     print("Введіть суму для задіяння першої знижки S1: ")
-    val S1: Double = bufferedReader.readLine().toDouble()
+    val S1: Double = readln().toDouble()
     var S2: Double
     var p1: Double
     var p2: Double
-    val sum: Double
 
     do {
         print("Введіть суму для задіяння другої знижки S2( S1 < S2): ")
-        S2 = bufferedReader.readLine().toDouble()
+        S2 = readln().toDouble()
     } while (S2 <= S1)
 
     do {
         print("Введіть першу знижку p1( 0 <= p1 <= 1): ")
-        p1 = bufferedReader.readLine().toDouble()
+        p1 = readln().toDouble()
     } while (p1 >= 1 || p1 <= 0)
 
     do {
         print("Введіть першу знижку p2( 0 <= p2 <= 1): ")
-        p2 = bufferedReader.readLine().toDouble()
+        p2 = readln().toDouble()
     } while (p2 >= 1 || p2 <= 0)
 
 
     print("Введіть суму цін продуктів: ")
-    val S: Double = bufferedReader.readLine().toDouble()
+    val S: Double = readln().toDouble()
 
     if (S >= S1) {
         if (S >= S2) {
-            sum = S * (1 - p2)
-
-            println("Сума цін продуктів: $sum")
+            println("Сума цін продуктів: " + (S * (1 - p2)))
         }
         else{
-            sum = S * (1 - p1)
-
-            println("Сума цін продуктів: $sum")
+            println("Сума цін продуктів: " + (S * (1 - p1)))
         }
     }
     else{
         println("Сума цін продуктів: $S")
     }
-
 }
 
-fun task2(bufferedReader: BufferedReader) {
+fun task2() {
     println("Завдання №2")
     val delta: Double
 
-    print("Введіть коефіцієнт а: ")
-    val a: Double = bufferedReader.readLine().toDouble()
+    var a: Double
+    var b: Double
 
-    print("Введіть коефіцієнт b: ")
-    val b: Double = bufferedReader.readLine().toDouble()
+    do {
+        //ввід a
+        print("Enter а: ")
+        a = readln().toDouble()
+
+        //ввід b
+        print("Enter b: ")
+        b = readln().toDouble()
+    } while (a == 0.0 && b == 0.0)
 
     print("Введіть коефіцієнт c: ")
-    val c: Double = bufferedReader.readLine().toDouble()
+    val c: Double = readln().toDouble()
 
     delta = a * a * c * c + 4 * b * c
 
@@ -78,9 +79,7 @@ fun task2(bufferedReader: BufferedReader) {
 }
 
 fun main() {
-    val bufferedReader = BufferedReader(InputStreamReader(System.`in`))
+    task1()
 
-    task1(bufferedReader)
-
-    task2(bufferedReader)
+    task2()
 }
