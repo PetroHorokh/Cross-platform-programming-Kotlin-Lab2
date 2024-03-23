@@ -1,5 +1,4 @@
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 fun task1() {
@@ -33,48 +32,77 @@ fun task1() {
     if (S >= S1) {
         if (S >= S2) {
             println("Сума цін продуктів: " + (S * (1 - p2)))
-        }
-        else{
+        } else {
             println("Сума цін продуктів: " + (S * (1 - p1)))
         }
-    }
-    else{
+    } else {
         println("Сума цін продуктів: $S")
     }
 }
 
 fun task2() {
     println("Завдання №2")
-    val delta: Double
-
     var a: Double
     var b: Double
 
     do {
-        //ввід a
-        print("Enter а: ")
+        print("Введіть коефіцієнт а: ")
         a = readln().toDouble()
 
-        //ввід b
-        print("Enter b: ")
+        print("Введіть коефіцієнт b: ")
         b = readln().toDouble()
     } while (a == 0.0 && b == 0.0)
 
     print("Введіть коефіцієнт c: ")
     val c: Double = readln().toDouble()
 
-    delta = a * a * c * c + 4 * b * c
+    val delta: Double = a.pow(2.0) * c.pow(2.0) + 4 * b * c
+
+    val root0 = - b / a
 
     if (delta > 0) {
-        println(
-            "Інтервал, що буде розв'язком: [-inf;"
-                    + ((a * c - sqrt(delta)) / 2)
+        val root1 = (a * c - sqrt(delta)) / 2
+        val root2 = (a * c + sqrt(delta)) / 2
+
+        if (root0 < root1) println(
+            "Інтервал, що буде розв'язком: (-inf;"
+                    + root0
                     + "]U["
-                    + ((a * c + sqrt(delta)) / 2)
-                    + ";inf]"
+                    + root0
+                    + ";"
+                    + root1
+                    + "]U["
+                    + root2
+                    + ";inf)"
         )
-    } else if (delta <= 0) {
-        println("Інтервал, що буде розв'язком: [-inf;inf]")
+        else if (root0 > root2) println(
+            ("Інтервал, що буде розв'язком: (-inf;"
+                    + root1
+                    + "]U["
+                    + root2
+                    + ";"
+                    + root0
+                    + "]U["
+                    + root0
+                    + ";inf)")
+        )
+        else println(
+            ("Інтервал, що буде розв'язком: (-inf;"
+                    + root1
+                    + "]U["
+                    + root2
+                    + ";inf)")
+        )
+    } else if (delta == 0.0) {
+        println(
+            ("Інтервал, що буде розв'язком: (-inf;"
+                    + root0
+                    + ")U("
+                    + root0
+                    + "inf)")
+        )
+    } else {
+        println("Інтервал, що буде розв'язком: (-inf;inf)")
     }
 }
 
