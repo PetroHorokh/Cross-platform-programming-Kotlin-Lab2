@@ -1,19 +1,18 @@
-import kotlin.math.pow
 import kotlin.math.sqrt
 
 fun task1() {
     println("Завдання №1")
 
     print("Введіть суму для задіяння першої знижки S1: ")
-    val S1: Double = readln().toDouble()
-    var S2: Double
+    val s1: Double = readln().toDouble()
+    var s2: Double
     var p1: Double
     var p2: Double
 
     do {
         print("Введіть суму для задіяння другої знижки S2( S1 < S2): ")
-        S2 = readln().toDouble()
-    } while (S2 <= S1)
+        s2 = readln().toDouble()
+    } while (s2 <= s1)
 
     do {
         print("Введіть першу знижку p1( 0 <= p1 <= 1): ")
@@ -27,16 +26,16 @@ fun task1() {
 
 
     print("Введіть суму цін продуктів: ")
-    val S: Double = readln().toDouble()
+    val s: Double = readln().toDouble()
 
-    if (S >= S1) {
-        if (S >= S2) {
-            println("Сума цін продуктів: " + (S * (1 - p2)))
+    if (s >= s1) {
+        if (s >= s2) {
+            println("Сума цін продуктів: " + (s * (1 - p2)))
         } else {
-            println("Сума цін продуктів: " + (S * (1 - p1)))
+            println("Сума цін продуктів: " + (s * (1 - p1)))
         }
     } else {
-        println("Сума цін продуктів: $S")
+        println("Сума цін продуктів: $s")
     }
 }
 
@@ -53,56 +52,30 @@ fun task2() {
         b = readln().toDouble()
     } while (a == 0.0 && b == 0.0)
 
+    val l = -b / a
+
     print("Введіть коефіцієнт c: ")
     val c: Double = readln().toDouble()
 
-    val delta: Double = a.pow(2.0) * c.pow(2.0) + 4 * b * c
+    val delta = a * a * c * c + 4 * b * c
 
-    val root0 = - b / a
-
-    if (delta > 0) {
-        val root1 = (a * c - sqrt(delta)) / 2
-        val root2 = (a * c + sqrt(delta)) / 2
-
-        if (root0 < root1) println(
-            "Інтервал, що буде розв'язком: (-inf;"
-                    + root0
-                    + "]U["
-                    + root0
-                    + ";"
-                    + root1
-                    + "]U["
-                    + root2
-                    + ";inf)"
-        )
-        else if (root0 > root2) println(
-            ("Інтервал, що буде розв'язком: (-inf;"
-                    + root1
-                    + "]U["
-                    + root2
-                    + ";"
-                    + root0
-                    + "]U["
-                    + root0
-                    + ";inf)")
-        )
-        else println(
-            ("Інтервал, що буде розв'язком: (-inf;"
-                    + root1
-                    + "]U["
-                    + root2
-                    + ";inf)")
-        )
-    } else if (delta == 0.0) {
-        println(
-            ("Інтервал, що буде розв'язком: (-inf;"
-                    + root0
-                    + ")U("
-                    + root0
-                    + "inf)")
-        )
+    if (delta <= 0) {
+        println("Solution:($l;inf)")
     } else {
-        println("Інтервал, що буде розв'язком: (-inf;inf)")
+        val x1 = (a * c - sqrt(delta)) / 2
+        val x2 = (a * c + sqrt(delta)) / 2
+
+        if (l < x1) {
+            println("Solution:($l;$x1]U[$x2;inf)")
+        } else if (l == x1) {
+            println("Solution:[$x2;inf)")
+        } else if (x1 < l && l < x2) {
+            println("Solution:[$x1;$l)U[$x2;inf)")
+        } else if (l == x2) {
+            println("Solution:[$x1;$x2)U($x2;inf)")
+        } else if (x2 < l) {
+            println("Solution:[$x1;$x2]U($l;inf)")
+        }
     }
 }
 
